@@ -2,27 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hotel Booking System</title>
+    <title>LuxStay Hotel</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Welcome to Our Hotel!</h1>
 
-    <h2>Available Rooms</h2>
-    <ul>
-        {% for room in rooms %}
-            <li>{{ room }}</li>
-        {% endfor %}
-    </ul>
+    <nav class="navbar">
+        <div class="logo">🏨 LuxStay</div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="#rooms">Rooms</a></li>
+            <li><a href="#reservations">My Reservations</a></li>
+        </ul>
+    </nav>
 
-    <h2>Book a Room</h2>
-    <form action="/book" method="post">
-        <input type="text" name="name" placeholder="Your Name" required><br>
-        <select name="room_type" required>
-            <option value="Single">Single Room</option>
-            <option value="Double">Double Room</option>
-        </select><br>
-        <button type="submit">Book Now</button>
-    </form>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Experience Luxury & Comfort</h1>
+            <p>Discover the perfect balance of luxury, comfort, and value at LuxStay Hotel. Book your stay today.</p>
+            <div class="hero-buttons">
+                <a href="#rooms" class="btn primary">Browse Rooms</a>
+                <a href="#reservations" class="btn secondary">View Reservations</a>
+            </div>
+        </div>
+    </section>
+
 </body>
 </html>
