@@ -9,7 +9,7 @@
     <a href="/rooms" class="back-link">← Back to All Rooms</a>
 
     <div class="room-header">
-        <img src="{{ room.image }}" alt="{{ room.name }}">
+        <img src="{{ url_for('static', filename=room.image) }}" alt="{{ room.name }}">
     </div>
 
     <div class="room-details-page">
@@ -21,10 +21,10 @@
                 <p><strong>Guests:</strong> {{ room.guests }}</p>
                 <p><strong>Bed Type:</strong> {{ room.bed_type }}</p>
 
-                <h3>Amenities:</h3>
+                <h3>Amenities</h3>
                 <ul>
                     {% for amenity in room.amenities %}
-                    <li>✔️ {{ amenity }}</li>
+                        <li>{{ amenity }}</li>
                     {% endfor %}
                 </ul>
             </div>
@@ -35,23 +35,21 @@
                 <h2>Book Your Stay</h2>
                 <form action="/reservations" method="POST">
                     <input type="hidden" name="room_name" value="{{ room.name }}">
-                    <input type="text" name="full_name" placeholder="Full Name" required><br>
-                    <input type="email" name="email" placeholder="Email" required><br>
-                    <input type="text" name="phone" placeholder="Phone Number" required><br>
-                    <input type="date" name="check_in" required><br>
-                    <input type="date" name="check_out" required><br>
+                    <input type="text" name="full_name" placeholder="Full Name" required>
+                    <input type="email" name="email" placeholder="Email" required>
+                    <input type="text" name="phone" placeholder="Phone Number" required>
+                    <input type="date" name="check_in" required>
+                    <input type="date" name="check_out" required>
                     <select name="guests" required>
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
                         <option value="3">3 Guests</option>
                         <option value="4">4 Guests</option>
-                    </select><br><br>
+                    </select>
                     <button type="submit">Book Now</button>
                 </form>
             </div>
         </div>
     </div>
 </body>
-
-
 </html>

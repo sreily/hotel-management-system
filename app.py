@@ -52,7 +52,7 @@ def room_details(room_id):
             'guests': 2,
             'bed_type': 'King Size Bed',
             'amenities': ['Free Wi-Fi', 'Ocean View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar'],
-            'image': '/static/oceanview.jpg',
+            'image': 'oceanview.jpg',
         },
         'standard': {
             'name': 'Standard Twin Room',
@@ -61,7 +61,7 @@ def room_details(room_id):
             'guests': 2,
             'bed_type': 'Standard Bed',
             'amenities': ['Free Wi-Fi', 'Air Conditioning', 'Flat-screen TV', 'Coffee Maker'],
-            'image': '/static/twinroom.jpg',
+            'image': 'twinroom.jpg',
         },
         'suite': {
             'name': 'Premium King Suite',
@@ -70,7 +70,7 @@ def room_details(room_id):
             'guests': 2,
             'bed_type': 'Luxury King Size Bed',
             'amenities': ['Free Wi-Fi', 'City View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar', 'Jacuzzi'],
-            'image': '/static/kingsuite.jpg',
+            'image': 'kingsuite.jpg',
         }
     }
 
