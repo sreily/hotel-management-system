@@ -82,33 +82,41 @@ def room_details(room_id):
     else:
         return "Room not found", 404
 
-@app.route('/reservations', methods=['GET', 'POST'])
+@app.route('/reservations', methods=['POST'])
 def reservations():
     if 'username' not in session:
         return redirect('/login')
+    
+    username = session['username']  # Get the currently logged-in user
 
-    if request.method == 'POST':
-        # Collect booking details
-        booking = {
-            'room_name': request.form['room_name'],
-            'full_name': request.form['full_name'],
-            'email': request.form['email'],
-            'phone': request.form['phone'],
-            'check_in': request.form['check_in'],
-            'check_out': request.form['check_out'],
-            'guests': request.form['guests'],
-        }
-        reservations_data.append(booking)  # Save booking into the list!
+    reservation = {
+        'room_name': request.form['room_name'],
+        'full_name': request.form['full_name'],
+        'email': request.form['email'],
+        'phone': request.form['phone'],
+        'check_in': request.form['check_in'],
+        'check_out': request.form['check_out'],
+        'guests': request.form['guests'],
+    }
 
-        return redirect('/my_reservations')
+    # If user has no reservations yet, create an empty list
+    if username not in reservations_data:
+        reservations_data[username] = []
 
-    return render_template('reservations.html')
+    reservations_data[username].append(reservation)
 
-@app.route('/my_reservations')
+    return redirect('/my-reservations')
+
+
+@app.route('/my-reservations')
 def my_reservations():
     if 'username' not in session:
         return redirect('/login')
-    return render_template('my_reservations.html', reservations=reservations_data)
+
+    username = session['username']
+    user_reservations = reservations_data.get(username, [])  # Get user's reservations
+
+    return render_template('my_reservations.html', reservations=user_reservations)
 
 @app.route('/logout')
 def logout():
