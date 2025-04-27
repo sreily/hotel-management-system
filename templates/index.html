@@ -8,13 +8,18 @@
 <body>
 
     <nav class="navbar">
-        <div class="logo">🏨 LuxLodge
+        <div class="logo">
+            <a href ="/">
+            <img src="{{ url_for('static', filename='luxlodgelogo.png') }}" alt="LuxLodge Logo" class="luxlodgelogo-img">
+            </a>
         </div>
         <ul class="nav-links">
             <li><a href="/">Home</a></li>
-            <li><a href="#rooms">Rooms</a></li>
-            <li><a href="#reservations">My Reservations</a></li>
+            <li><a href="/rooms">Rooms</a></li>
+            <li><a href="/reservations">My Reservations</a></li>
+            <li><a href="/logout" class="logout-link">Logout</a></li> <!-- ADD THIS -->
         </ul>
+        
     </nav>
 
     <section class="hero">

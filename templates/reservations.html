@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reservations | LuxLodge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" class="luxlodgelogo-img" alt="LuxLodge Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/rooms">Rooms</a></li>
+            <li><a href="/reservations">My Reservations</a></li>
+            <li><a href="/logout" class="logout-link">Logout</a></li>
+        </ul>
+    </div>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>My Reservations</h1>
+            <p>View your booked rooms and manage your stay easily with LuxLodge.</p>
+            <div class="hero-buttons">
+                <a href="/rooms" class="btn primary">Book Another Room</a>
+                <a href="/" class="btn secondary">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
