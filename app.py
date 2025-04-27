@@ -4,6 +4,8 @@ from hotel import HotelManagementSystem
 app = Flask(__name__)
 app.secret_key = 'vgtucomputerengineeringekfu24/1'
 
+reservations_data = {}
+
 users = {}
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -80,11 +82,33 @@ def room_details(room_id):
     else:
         return "Room not found", 404
 
-@app.route('/reservations')
+@app.route('/reservations', methods=['GET', 'POST'])
 def reservations():
     if 'username' not in session:
         return redirect('/login')
+
+    if request.method == 'POST':
+        # Collect booking details
+        booking = {
+            'room_name': request.form['room_name'],
+            'full_name': request.form['full_name'],
+            'email': request.form['email'],
+            'phone': request.form['phone'],
+            'check_in': request.form['check_in'],
+            'check_out': request.form['check_out'],
+            'guests': request.form['guests'],
+        }
+        reservations_data.append(booking)  # Save booking into the list!
+
+        return redirect('/my_reservations')
+
     return render_template('reservations.html')
+
+@app.route('/my_reservations')
+def my_reservations():
+    if 'username' not in session:
+        return redirect('/login')
+    return render_template('my_reservations.html', reservations=reservations_data)
 
 @app.route('/logout')
 def logout():

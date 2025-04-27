@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Reservations</title>
+</head>
+<body>
+    <h1>My Reservations</h1>
+
+    {% if reservations %}
+        <ul>
+            {% for r in reservations %}
+            <li>
+                <strong>Room:</strong> {{ r.room_name }} <br>
+                <strong>Name:</strong> {{ r.full_name }} <br>
+                <strong>Email:</strong> {{ r.email }} <br>
+                <strong>Phone:</strong> {{ r.phone }} <br>
+                <strong>Check-in:</strong> {{ r.check_in }} <br>
+                <strong>Check-out:</strong> {{ r.check_out }} <br>
+                <strong>Guests:</strong> {{ r.guests }}
+                <hr>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reservations yet.</p>
+    {% endif %}
+
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -329,7 +329,8 @@ body {
 }
 
 .room-header img {
-    width: 100%;
+    margin-left:50px;
+    width: 90%;
     height: 400px;
     object-fit: cover;
     border-radius: 0;
@@ -406,8 +407,10 @@ body {
 }
 
 .back-link {
+    position:absolute;
+    left:60px;
     display: block;
-    margin: 20px;
+    padding-bottom:480px;
     font-size: 16px;
     color: #007bff;
     text-decoration: none;
@@ -415,4 +418,11 @@ body {
 
 .back-link:hover {
     text-decoration: underline;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
 }

@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <a href="/rooms" class="back-link">← Back to All Rooms</a>
+    <div class="navbar">
+        <div class="logo">
+            <a href="/"><img src="{{ url_for('static', filename='luxlodgelogo.png') }}" class="luxlodgelogo-img" alt="LuxLodge Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/rooms">Rooms</a></li>
+            <li><a href="/reservations">My Reservations</a></li>
+            <li><a href="/logout" class="logout-link">Logout</a></li>
+        </ul>
+    </div>
+    <a href="{{ url_for('rooms') }}">← Back to All Rooms</a>
 
     <div class="room-header">
         <img src="{{ url_for('static', filename=room.image) }}" alt="{{ room.name }}">
@@ -35,19 +46,27 @@
                 <h2>Book Your Stay</h2>
                 <form action="/reservations" method="POST">
                     <input type="hidden" name="room_name" value="{{ room.name }}">
-                    <input type="text" name="full_name" placeholder="Full Name" required>
-                    <input type="email" name="email" placeholder="Email" required>
-                    <input type="text" name="phone" placeholder="Phone Number" required>
-                    <input type="date" name="check_in" required>
-                    <input type="date" name="check_out" required>
+                
+                    <input type="text" name="full_name" placeholder="Full Name" required><br>
+                    <input type="email" name="email" placeholder="Email" required><br>
+                    <input type="text" name="phone" placeholder="Phone Number" required><br>
+                
+                    <label for="check_in" class="form-label">Check In</label>
+                    <input type="date" id="check_in" name="check_in" required><br>
+                
+                    <label for="check_out" class="form-label">Check Out</label>
+                    <input type="date" id="check_out" name="check_out" required><br>
+                
                     <select name="guests" required>
                         <option value="1">1 Guest</option>
                         <option value="2">2 Guests</option>
                         <option value="3">3 Guests</option>
                         <option value="4">4 Guests</option>
-                    </select>
+                    </select><br><br>
+                
                     <button type="submit">Book Now</button>
                 </form>
+                
             </div>
         </div>
     </div>
