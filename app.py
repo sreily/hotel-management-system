@@ -41,7 +41,44 @@ def rooms():
 
 @app.route('/rooms/<room_id>')
 def room_details(room_id):
-    ...
+    if 'username' not in session:
+        return redirect('/login')
+
+    room_info = {
+        'deluxe': {
+            'name': 'Deluxe Ocean View',
+            'price': 299,
+            'size': '450 sq ft',
+            'guests': 2,
+            'bed_type': 'King Size Bed',
+            'amenities': ['Free Wi-Fi', 'Ocean View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar'],
+            'image': '/static/oceanview.jpg',
+        },
+        'standard': {
+            'name': 'Standard Twin Room',
+            'price': 199,
+            'size': '350 sq ft',
+            'guests': 2,
+            'bed_type': 'Standard Bed',
+            'amenities': ['Free Wi-Fi', 'Air Conditioning', 'Flat-screen TV', 'Coffee Maker'],
+            'image': '/static/twinroom.jpg',
+        },
+        'suite': {
+            'name': 'Premium King Suite',
+            'price': 499,
+            'size': '650 sq ft',
+            'guests': 2,
+            'bed_type': 'Luxury King Size Bed',
+            'amenities': ['Free Wi-Fi', 'City View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar', 'Jacuzzi'],
+            'image': '/static/kingsuite.jpg',
+        }
+    }
+
+    room = room_info.get(room_id)
+    if room:
+        return render_template('room_details.html', room=room)
+    else:
+        return "Room not found", 404
 
 @app.route('/reservations')
 def reservations():

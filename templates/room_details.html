@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ room.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="/rooms" class="back-link">← Back to All Rooms</a>
+
+    <div class="room-header">
+        <img src="{{ room.image }}" alt="{{ room.name }}">
+    </div>
+
+    <div class="room-details-page">
+        <div class="left-side">
+            <div class="room-description">
+                <h1>{{ room.name }}</h1>
+                <p><strong>Price:</strong> ${{ room.price }} / night</p>
+                <p><strong>Size:</strong> {{ room.size }}</p>
+                <p><strong>Guests:</strong> {{ room.guests }}</p>
+                <p><strong>Bed Type:</strong> {{ room.bed_type }}</p>
+
+                <h3>Amenities:</h3>
+                <ul>
+                    {% for amenity in room.amenities %}
+                    <li>✔️ {{ amenity }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="booking-form">
+                <h2>Book Your Stay</h2>
+                <form action="/reservations" method="POST">
+                    <input type="hidden" name="room_name" value="{{ room.name }}">
+                    <input type="text" name="full_name" placeholder="Full Name" required><br>
+                    <input type="email" name="email" placeholder="Email" required><br>
+                    <input type="text" name="phone" placeholder="Phone Number" required><br>
+                    <input type="date" name="check_in" required><br>
+                    <input type="date" name="check_out" required><br>
+                    <select name="guests" required>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                    </select><br><br>
+                    <button type="submit">Book Now</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+</html>
