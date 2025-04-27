@@ -39,6 +39,10 @@ def rooms():
         return redirect('/login')
     return render_template('rooms.html')
 
+@app.route('/rooms/<room_id>')
+def room_details(room_id):
+    ...
+
 @app.route('/reservations')
 def reservations():
     if 'username' not in session:
