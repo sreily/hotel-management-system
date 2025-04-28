@@ -87,7 +87,7 @@ def reservations():
     if 'username' not in session:
         return redirect('/login')
     
-    username = session['username']  # Get the currently logged-in user
+    username = session['username']  # get the logged-in username
 
     reservation = {
         'room_name': request.form['room_name'],
@@ -99,7 +99,6 @@ def reservations():
         'guests': request.form['guests'],
     }
 
-    # If user has no reservations yet, create an empty list
     if username not in reservations_data:
         reservations_data[username] = []
 
@@ -114,7 +113,7 @@ def my_reservations():
         return redirect('/login')
 
     username = session['username']
-    user_reservations = reservations_data.get(username, [])  # Get user's reservations
+    user_reservations = reservations_data.get(username, [])
 
     return render_template('my_reservations.html', reservations=user_reservations)
 
