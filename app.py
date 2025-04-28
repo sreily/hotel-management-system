@@ -8,6 +8,36 @@ reservations_data = {}
 
 users = {}
 
+room_info = {
+    'deluxe': {
+        'name': 'Deluxe Ocean View',
+        'price': 299,
+        'size': '450 sq ft',
+        'guests': 2,
+        'bed_type': 'King Size Bed',
+        'amenities': ['Free Wi-Fi', 'Ocean View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar'],
+        'image': 'oceanview.jpg',
+    },
+    'standard': {
+        'name': 'Standard Twin Room',
+        'price': 199,
+        'size': '350 sq ft',
+        'guests': 2,
+        'bed_type': 'Standard Bed',
+        'amenities': ['Free Wi-Fi', 'Air Conditioning', 'Flat-screen TV', 'Coffee Maker'],
+        'image': 'twinroom.jpg',
+    },
+    'suite': {
+        'name': 'Premium King Suite',
+        'price': 499,
+        'size': '650 sq ft',
+        'guests': 2,
+        'bed_type': 'Luxury King Size Bed',
+        'amenities': ['Free Wi-Fi', 'City View', 'Flat-screen TV', 'Breakfast', 'Air Conditioning', 'Mini Bar', 'Jacuzzi'],
+        'image': 'kingsuite.jpg',
+    }
+}
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -82,12 +112,16 @@ def room_details(room_id):
     else:
         return "Room not found", 404
 
+@app.route('/confirmation')
+def confirmation():
+    return render_template('confirmation.html')
+
 @app.route('/reservations', methods=['POST'])
 def reservations():
     if 'username' not in session:
         return redirect('/login')
     
-    username = session['username']  # get the logged-in username
+    username = session['username']
 
     reservation = {
         'room_name': request.form['room_name'],
@@ -104,18 +138,33 @@ def reservations():
 
     reservations_data[username].append(reservation)
 
-    return redirect('/my-reservations')
+    # Find correct room details based on room_name
+    room_details = next(
+        (details for key, details in room_info.items() if details['name'] == reservation['room_name']),
+        None
+    )
+
+    return render_template('confirmation.html', room=room_details)
 
 
-@app.route('/my-reservations')
+@app.route('/my-reservations', methods=['GET', 'POST'])
 def my_reservations():
-    if 'username' not in session:
-        return redirect('/login')
+    reservations = None
+    email_searched = None
 
-    username = session['username']
-    user_reservations = reservations_data.get(username, [])
+    if request.method == 'POST':
+        email = request.form['email']
+        email_searched = email
 
-    return render_template('my_reservations.html', reservations=user_reservations)
+        # Gather reservations matching the email
+        reservations = []
+        for user_reservations in reservations_data.values():
+            for reservation in user_reservations:
+                if reservation['email'] == email:
+                    reservations.append(reservation)
+
+    return render_template('my_reservations.html', reservations=reservations, email_searched=email_searched)
+
 
 @app.route('/logout')
 def logout():

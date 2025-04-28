@@ -3,7 +3,8 @@ body, html {
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
-    height: 100%;
+    height: auto;
+    min-height: 100vh;
 }
 
 
@@ -78,8 +79,6 @@ body {
     height: 70px;
     z-index: 1000;
 }
-
-
 
 .logo {
     display: flex;
@@ -425,4 +424,69 @@ body {
     margin-bottom: 5px;
     display: block;
     color: #333;
+}
+
+.reservation-page {
+    padding: 40px;
+    text-align: center;
+}
+
+.reservation-search {
+    margin-bottom: 30px;
+}
+
+.reservation-search input, .reservation-search button {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 300px;
+}
+
+.reservation-card {
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 1000px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    align-items: center;
+}
+
+.reservation-image img {
+    width: 200px;
+    height: 150px;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.reservation-details {
+    flex: 1;
+    padding: 0 20px;
+    text-align: left;
+}
+
+.reservation-status {
+    text-align: center;
+}
+
+.confirmed {
+    color: green;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.cancel-btn {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.cancel-btn:hover {
+    background-color: #c0392b;
 }

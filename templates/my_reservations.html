@@ -2,23 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Reservations</title>
+    <title>My Reservations | LuxLodge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>My Reservations</h1>
 
-{% if reservations %}
-    <ul>
-    {% for r in reservations %}
-        <li>{{ r.room_name }} from {{ r.check_in }} to {{ r.check_out }} (Guests: {{ r.guests }})</li>
-    {% endfor %}
+<nav class="navbar">
+    <div class="logo">
+        <a href="/">
+            <img src="{{ url_for('static', filename='luxlodgelogo.png') }}" alt="LuxLodge Logo" class="luxlodgelogo-img">
+        </a>
+    </div>
+    <ul class="nav-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/rooms">Rooms</a></li>
+        <li><a href="/my-reservations">My Reservations</a></li>
+        <li><a href="/logout">Logout</a></li>
     </ul>
-{% else %}
-    <p>No reservations yet.</p>
-{% endif %}
+</nav>
 
-<br>
-<a href="/">Back to Home</a>
+<section class="my-reservations">
+    <h1>My Reservations</h1>
+    <p>Enter your email address to view your current and past reservations.</p>
+
+    <form method="POST" action="/my-reservations">
+        <label for="email">Email Address:</label>
+        <input type="email" id="email" name="email" required value="{{ email_searched if email_searched else '' }}">
+        <button type="submit">Find My Reservations</button>
+    </form>
+
+    {% if email_searched %}
+        {% if reservations %}
+            <h2>{{ reservations|length }} Reservation{{ 's' if reservations|length > 1 else '' }} Found</h2>
+
+            {% for reservation in reservations %}
+<div class="reservation-card">
+    <h3>{{ reservation.room_name }}</h3>
+    <p><strong>Check-in:</strong> {{ reservation.check_in }}</p>
+    <p><strong>Check-out:</strong> {{ reservation.check_out }}</p>
+    <p><strong>Guests:</strong> {{ reservation.guests }}</p>
+    <p><strong>Guest Name:</strong> {{ reservation.full_name }}</p>
+    <p><strong>Phone:</strong> {{ reservation.phone }}</p>
+    <p><strong>Email:</strong> {{ reservation.email }}</p>
+
+    {% if reservation.status == 'Cancelled' %}
+        <p style="color: red; font-weight: bold;">Status: Cancelled</p>
+    {% else %}
+        <form method="POST" action="/cancel_reservation">
+            <input type="hidden" name="email" value="{{ reservation.email }}">
+            <input type="hidden" name="check_in" value="{{ reservation.check_in }}">
+            <button type="submit" class="cancel-btn">Cancel Reservation</button>
+        </form>
+    {% endif %}
+</div>
+{% endfor %}
+        {% else %}
+            <p>No reservations found for this email.</p>
+        {% endif %}
+    {% endif %}
+</section>
 
 </body>
 </html>

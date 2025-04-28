@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ room.name }}</title>
+    <title>Confirmation</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -42,30 +42,10 @@
         </div>
 
         <div class="right-side">
-            <div class="booking-form">
-                <h2>Book Your Stay</h2>
-                <form action="/reservations" method="POST">
-                    <input type="hidden" name="room_name" value="{{ room.name }}">
-                
-                    <input type="text" name="full_name" placeholder="Full Name" required><br>
-                    <input type="email" name="email" placeholder="Email" required><br>
-                    <input type="text" name="phone" placeholder="Phone Number" required><br>
-                
-                    <label for="check_in" class="form-label">Check In</label>
-                    <input type="date" id="check_in" name="check_in" required><br>
-                
-                    <label for="check_out" class="form-label">Check Out</label>
-                    <input type="date" id="check_out" name="check_out" required><br>
-                
-                    <select name="guests" required>
-                        <option value="1">1 Guest</option>
-                        <option value="2">2 Guests</option>
-                        <option value="3">3 Guests</option>
-                        <option value="4">4 Guests</option>
-                    </select><br><br>
-                
-                    <button type="submit">Book Now</button>
-                </form>
+            <div class="confirmation-banner">
+                <h2>Booking Confirmed!</h2>
+                <p>Thank you for booking with LuxLodge. You can view your reservation below.</p>
+                <a href="/my-reservations" class="btn">View My Reservations</a>
             </div>
         </div>
     </div>
