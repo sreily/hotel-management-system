@@ -6,6 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+<div class="auth-container">
+    <img src="{{ url_for('static', filename='luxlodgelogo.png') }}" alt="LuxLodge Logo" class="auth-logo">
     <div class="form-container">
         <h1>Register</h1>
         <form action="/register" method="post">
@@ -15,5 +17,6 @@
         </form>
         <p>Already have an account? <a href="/login">Login here</a>.</p>
     </div>
+</div>
 </body>
 </html>
