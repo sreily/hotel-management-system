@@ -40,40 +40,45 @@ room_info = {
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-        if username in users and users[username] == password:
-            session['username'] = username
+        if email in users and users[email] == password:
+            session['email'] = email
             return redirect('/')
         else:
-            return "Login failed! Wrong username or password."
-    return render_template('login.html')
+            error = "Incorrect Email Address or Password"
+    return render_template('login.html', error=error)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    error = None
     if request.method == 'POST':
-        username = request.form['username']
+        email = request.form['email']
         password = request.form['password']
-        users[username] = password
-        return redirect('/login')
-    return render_template('register.html')
+        if '@' not in email or '.' not in email:
+            error = "Invalid Email Address"
+        else:
+            users[email] = password
+            return redirect('/login')
+    return render_template('register.html', error=error)
 
 @app.route('/')
 def home():
-    if 'username' not in session:
+    if 'email' not in session:
         return redirect('/login')
     return render_template('index.html')
 
 @app.route('/rooms')
 def rooms():
-    if 'username' not in session:
+    if 'email' not in session:
         return redirect('/login')
     return render_template('rooms.html')
 
 @app.route('/rooms/<room_id>')
 def room_details(room_id):
-    if 'username' not in session:
+    if 'email' not in session:
         return redirect('/login')
 
     room_info = {
@@ -118,10 +123,10 @@ def confirmation():
 
 @app.route('/reservations', methods=['POST'])
 def reservations():
-    if 'username' not in session:
+    if 'email' not in session:
         return redirect('/login')
     
-    username = session['username']
+    email = session['email']
 
     reservation = {
         'room_name': request.form['room_name'],
@@ -133,12 +138,11 @@ def reservations():
         'guests': request.form['guests'],
     }
 
-    if username not in reservations_data:
-        reservations_data[username] = []
+    if email not in reservations_data:
+        reservations_data[email] = []
 
-    reservations_data[username].append(reservation)
+    reservations_data[email].append(reservation)
 
-    # Find correct room details based on room_name
     room_details = next(
         (details for key, details in room_info.items() if details['name'] == reservation['room_name']),
         None
@@ -146,6 +150,30 @@ def reservations():
 
     return render_template('confirmation.html', room=room_details)
 
+@app.route('/cancel-reservation', methods=['POST'])
+def cancel_reservation():
+    if 'email' not in session:
+        return redirect('/login')
+
+    email = session['email']
+    cancel_email = request.form['cancel_email']
+    check_in = request.form['cancel_check_in']
+    check_out = request.form['cancel_check_out']
+
+    if email in reservations_data:
+        reservations_data[email] = [
+            r for r in reservations_data[email]
+            if not (r['email'] == cancel_email and r['check_in'] == check_in and r['check_out'] == check_out)
+        ]
+
+    return redirect('/my-reservations')
+
+@app.route('/confirm-cancel', methods=['GET'])
+def confirm_cancel():
+    email = request.args.get('email')
+    check_in = request.args.get('check_in')
+    check_out = request.args.get('check_out')
+    return render_template('confirm_cancel.html', email=email, check_in=check_in, check_out=check_out)
 
 @app.route('/my-reservations', methods=['GET', 'POST'])
 def my_reservations():
@@ -156,7 +184,6 @@ def my_reservations():
         email = request.form['email']
         email_searched = email
 
-        # Gather reservations matching the email
         reservations = []
         for user_reservations in reservations_data.values():
             for reservation in user_reservations:
@@ -168,7 +195,7 @@ def my_reservations():
 
 @app.route('/logout')
 def logout():
-    session.pop('username', None)
+    session.pop('email', None)
     return redirect('/login')
 
 

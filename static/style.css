@@ -285,7 +285,7 @@ body, html {
     border: 2px solid #007bff;
 }
 .logout-link {
-    color: #ff4d4d; /* red color */
+    color: #ff4d4d;
     font-weight: bold;
 }
 
@@ -566,7 +566,7 @@ body, html {
 
 .reservation-card {
     background: white;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     padding: 20px;
     margin: 20px auto;
@@ -607,6 +607,7 @@ body, html {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    margin-left:15px;
 }
 
 .cancel-btn:hover {
@@ -631,7 +632,7 @@ body, html {
     background: #1d4257;
   }
 .my-reservations {
-    max-width: 600px;
+    max-width: 1900px;
     margin: 80px auto;
     padding: 30px;
     background-color: #ffffff;
@@ -705,270 +706,4 @@ body, html {
 .auth-container {
     margin-bottom:70px;
 }
-/* ============================ */
-/*   Why Choose LuxStay Styles  */
-/* ============================ */
-.why-choose-luxstay {
-    padding: 80px 20px;
-    background: #f8f9fa;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  .why-choose-luxstay.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .why-choose-luxstay h2 {
-    font-size: 2.5rem;
-    color: #1e1e2f;
-    margin-bottom: 8px;
-  }
-  .why-choose-luxstay .underline {
-    width: 60px;
-    height: 4px;
-    background: #3951b4;
-    margin: 0 auto 40px;
-    border-radius: 2px;
-  }
-  
-  .luxstay-cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-  }
-  
-  .luxstay-cards .card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px 20px;
-    width: 320px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: cardFadeUp 0.6s ease forwards;
-  }
-  .luxstay-cards.visible .card { /* unused; we animate individually below */ }
-  
-  .luxstay-cards .card:nth-child(1) { animation-delay: 0.2s; }
-  .luxstay-cards .card:nth-child(2) { animation-delay: 0.4s; }
-  .luxstay-cards .card:nth-child(3) { animation-delay: 0.6s; }
-  
-  @keyframes cardFadeUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .luxstay-cards .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-  }
-  
-  .luxstay-cards .icon-wrapper {
-    width: 64px;
-    height: 64px;
-    margin: 0 auto 20px;
-    background: #e6efff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .luxstay-cards .icon-wrapper img {
-    width: 32px;
-    height: 32px;
-  }
-  
-  .luxstay-cards h3 {
-    font-size: 1.25rem;
-    color: #1e1e2f;
-    margin-bottom: 12px;
-  }
-  .luxstay-cards p {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-  }
-  
-/* Why Choose Section */
-.why-choose {
-    padding: 80px 20px;
-    background-color: #ffffff;
-    text-align: center;
-    animation: fadeInUp 1s ease forwards;
-    opacity: 0;
-    transform: translateY(20px);
-}
 
-.why-choose.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.why-choose h2 {
-    font-size: 36px;
-    margin-bottom: 50px;
-    color: #1a1a1a;
-}
-
-.features {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 40px;
-}
-
-.feature-card {
-    background-color: #f8f9fa;
-    padding: 30px;
-    width: 300px;
-    border-radius: 15px;
-    text-align: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-    cursor: pointer;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-}
-
-.feature-card img {
-    height: 80px;
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #007bff;
-}
-
-.feature-card p {
-    font-size: 15px;
-    color: #555;
-}
-
-/* Animation */
-@keyframes fadeInUp {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-/* ================================ */
-/*   Ready to Experience Luxury CTA  */
-/* ================================ */
-.cta-experience {
-    background: url('/static/cta-bg.jpg') center/cover no-repeat;
-    position: relative;
-    padding: 80px 20px;
-    text-align: center;
-    color: #fff;
-  }
-  .cta-experience::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.5);
-  }
-  .cta-experience .cta-content {
-    position: relative;
-    z-index: 1;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .cta-experience h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-  .cta-experience p {
-    font-size: 1.125rem;
-    margin-bottom: 30px;
-    line-height: 1.4;
-  }
-  .cta-experience .cta-btn {
-    display: inline-block;
-    padding: 14px 32px;
-    font-size: 1rem;
-    background: #007bff;
-    color: #fff;
-    border-radius: 30px;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .cta-experience .cta-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-  }
-  
-  /* ================ Footer ================ */
-  .site-footer {
-    background: #1e1e2f;
-    color: #ccc;
-    padding: 60px 20px 20px;
-    font-size: 0.95rem;
-  }
-  .footer-top {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 40px;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto 40px;
-  }
-  .footer-about,
-  .footer-contact,
-  .footer-links {
-    flex: 1 1 250px;
-  }
-  .footer-about h3 {
-    color: #fff;
-    margin-bottom: 15px;
-  }
-  .footer-contact h4,
-  .footer-links h4 {
-    color: #fff;
-    margin-bottom: 10px;
-  }
-  .footer-contact p,
-  .footer-links ul li {
-    margin-bottom: 8px;
-  }
-  .footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .footer-links ul li a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.2s;
-  }
-  .footer-links ul li a:hover {
-    color: #fff;
-  }
-  .footer-contact a {
-    color: #ccc;
-    text-decoration: none;
-  }
-  .footer-contact a:hover {
-    color: #fff;
-  }
-  .footer-bottom {
-    border-top: 1px solid #333;
-    text-align: center;
-    padding-top: 20px;
-  }
-  
