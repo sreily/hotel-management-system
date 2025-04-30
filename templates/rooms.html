@@ -93,5 +93,49 @@
             </div>
         </div>
     </section>
+
+      <footer class="site-footer">
+        <div class="footer-top">
+          <div class="footer-about">
+            <h3>LuxLodge Hotel</h3>
+            <p>Experience luxury and comfort at our premium hotel. We provide exceptional service and memorable stays for all our guests.</p>
+          </div>
+          <div class="footer-contact">
+            <h4>Contact Us</h4>
+            <p>123 Luxury Lane, Suite 100</p>
+            <p>+1 (555) 123-4567</p>
+            <p><a href="mailto:info@luxlodge.example">info@luxstay.example</a></p>
+          </div>
+          <div class="footer-links">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/about">About Us</a></li>
+              <li><a href="/services">Services</a></li>
+              <li><a href="/gallery">Gallery</a></li>
+              <li><a href="/terms">Terms &amp; Conditions</a></li>
+              <li><a href="/privacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>© 2025 LuxLodge Hotel. All rights reserved.</p>
+        </div>
+      </footer>
+    
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const section = document.querySelector('.why-choose-luxstay');
+          const obs = new IntersectionObserver((entries, observer) => {
+            entries.forEach(e => {
+              if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                observer.unobserve(e.target);
+              }
+            });
+          }, { threshold: 0.3 });
+          obs.observe(section);
+        });
+      </script>
 </body>
 </html>

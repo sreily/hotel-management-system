@@ -7,16 +7,6 @@ body, html {
     min-height: 100vh;
 }
 
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
-    margin: 0;
-}
-
 .form-container {
     background-color: white;
     padding: 40px;
@@ -768,5 +758,111 @@ body {
 
 .auth-container {
     margin-bottom:70px;
+}
+
+.go-back-link {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left:15px;
+    text-decoration:none;
+}
+
+.go-back-link:hover {
+    background-color: #ccc;
+}
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f2f5;
+}
+
+.cta-experience {
+    background-color: #666;
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.cta-experience h2 {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.cta-experience p {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.cta-btn {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 30px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Footer Section */
+.site-footer {
+    background-color: #1a1a2e;
+    color: white;
+    padding: 40px 20px 20px;
+}
+
+.footer-top {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+
+.footer-top h3, .footer-top h4 {
+    margin-bottom: 10px;
+}
+
+.footer-links ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links ul li {
+    margin-bottom: 8px;
+}
+
+.footer-links a, .footer-contact a {
+    color: #cfd8dc;
+    text-decoration: none;
+}
+
+.footer-links a:hover, .footer-contact a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    font-size: 14px;
+    color: #bbb;
+    padding-top: 20px;
+    border-top: 1px solid #333;
 }
 
