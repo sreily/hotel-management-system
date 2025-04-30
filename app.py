@@ -40,6 +40,7 @@ room_info = {
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    error = None
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -47,17 +48,21 @@ def login():
             session['email'] = email
             return redirect('/')
         else:
-            return "Login failed! Wrong email or password."
-    return render_template('login.html')
+            error = "Incorrect Email Address or Password"
+    return render_template('login.html', error=error)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    error = None
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        users[email] = password
-        return redirect('/login')
-    return render_template('register.html')
+        if '@' not in email or '.' not in email:
+            error = "Invalid Email Address"
+        else:
+            users[email] = password
+            return redirect('/login')
+    return render_template('register.html', error=error)
 
 @app.route('/')
 def home():

@@ -590,3 +590,9 @@ body {
 .go-back-link:hover {
     background-color: #ccc;
 }
+
+.error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+}

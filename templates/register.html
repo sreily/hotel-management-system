@@ -10,6 +10,11 @@
     <img src="{{ url_for('static', filename='luxlodgelogo.png') }}" alt="LuxLodge Logo" class="auth-logo">
     <div class="form-container">
         <h1>Register</h1>
+    
+        {% if error %}
+            <p class="error-message">{{ error }}</p>
+        {% endif %}
+    
         <form action="/register" method="post">
             <input type="email" name="email" placeholder="Email Address" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
@@ -17,6 +22,7 @@
         </form>
         <p>Already have an account? <a href="/login">Login here</a>.</p>
     </div>
+    
 </div>
 </body>
 </html>
