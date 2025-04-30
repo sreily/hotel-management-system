@@ -25,13 +25,93 @@
     <section class="hero">
         <div class="hero-content">
             <h1>Experience Luxury & Comfort</h1>
-            <p>Discover the perfect balance of luxury, comfort, and value at LuxStay Hotel. Book your stay today.</p>
+            <p>Discover the perfect balance of luxury, comfort, and value at LuxLodge Hotel. Book your stay today.</p>
             <div class="hero-buttons">
                 <a href="/rooms" class="btn primary">Browse Rooms</a>
                 <a href="/my-reservations" class="btn secondary">View Reservations</a>
             </div>
         </div>
     </section>
+    <!-- ============================ -->
+<!--  Why Choose LuxLodge Section  -->
+<!-- ============================ -->
+<section class="why-choose-luxstay">
+    <h2>Why Choose LuxLodge</h2>
+    <div class="underline"></div>
+    <div class="luxstay-cards">
+      <div class="card">
+        <div class="icon-emoji">🛏️</div>
+        <h3>Luxurious Rooms</h3>
+        <p>Experience ultimate comfort with our premium beds, fine linens, and thoughtfully designed spaces.</p>
+      </div>
+      <div class="card">
+        <div class="icon-emoji">⭐</div>
+        <h3>5-Star Service</h3>
+        <p>Our dedicated staff provides exceptional service, ensuring every aspect of your stay exceeds expectations.</p>
+      </div>
+      <div class="card">
+        <div class="icon-emoji">🔒</div>
+        <h3>Secure Booking</h3>
+        <p>Book with confidence using our secure reservation system with instant confirmation.</p>
+      </div>
+    </div>
+  </section>
+    <!-- ================================ -->
+  <!--  Ready to Experience Luxury CTA  -->
+  <!-- ================================ -->
+  <section class="cta-experience">
+    <div class="cta-content">
+      <h2>Ready to Experience Luxury?</h2>
+      <p>Book your stay today and experience the perfect blend of luxury, comfort, and exceptional service.</p>
+      <a href="/rooms" class="btn cta-btn">Book Now</a>
+    </div>
+  </section>
+
+  <!-- ================ Footer =============== -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-about">
+        <h3>LuxLodge Hotel</h3>
+        <p>Experience luxury and comfort at our premium hotel. We provide exceptional service and memorable stays for all our guests.</p>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>123 Luxury Lane, Suite 100</p>
+        <p>+1 (555) 123-4567</p>
+        <p><a href="mailto:info@luxlodge.example">info@luxstay.example</a></p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="/about">About Us</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/gallery">Gallery</a></li>
+          <li><a href="/terms">Terms &amp; Conditions</a></li>
+          <li><a href="/privacy">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 LuxLodge Hotel. All rights reserved.</p>
+    </div>
+  </footer>
+
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const section = document.querySelector('.why-choose-luxstay');
+      const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.3 });
+      obs.observe(section);
+    });
+  </script>
+  
 
 </body>
 </html>

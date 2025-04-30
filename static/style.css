@@ -1,72 +1,130 @@
+/* Reset & global */
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #f0f2f5;
-    height: auto;
-    min-height: 100vh;
-}
-
-
-body {
-    display: flex;
+  }
+  
+  /* Only the hero needs to be full-screen centered */
+  .hero {
+    background: url('/static/lobby1.jpg') no-repeat center center;
+    background-size: cover;
+    height: 100vh;
+    display: flex;               /* center just the hero */
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f2f5;
-    margin: 0;
-}
-
-.form-container {
-    background-color: white;
-    padding: 40px;
-    margin-bottom: 50px;
-    border-radius: 8px;
-    box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
-    width: 300px;
     text-align: center;
-}
-
-.form-container h1 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.form-container input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.form-container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    margin-top: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.form-container button:hover {
-    background-color: #0056b3;
-}
-
-.form-container p {
-    margin-top: 15px;
-}
-
-.form-container a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-.form-container a:hover {
-    text-decoration: underline;
-}
+    position: relative;
+    padding: 0 20px;
+  }
+  /* Add this to your CSS */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .hero-content {
+    animation: fadeIn 1.5s ease-out;
+  }
+  
+  .hero-content h1 {
+    animation: fadeIn 1s ease-out 0.3s both;
+  }
+  
+  .hero-content p {
+    animation: fadeIn 1s ease-out 0.6s both;
+  }
+  
+  .cta-buttons {
+    animation: fadeIn 1s ease-out 0.9s both;
+  }
+  /* Add this to your CSS */
+.hero-section {
+    background: linear-gradient(-45deg, #f3f4f6, #e5e7eb, #d1d5db, #9ca3af);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  /* ===== Your “Why Choose LuxStay” styles ===== */
+  .why-choose-luxstay {
+    padding: 80px 20px;
+    background: #f8f9fa;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .why-choose-luxstay.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .why-choose-luxstay h2 {
+    font-size: 2.5rem;
+    color: #1e1e2f;
+    margin-bottom: 8px;
+  }
+  .why-choose-luxstay .underline {
+    width: 60px;
+    height: 4px;
+    background: #3951b4;
+    margin: 0 auto 40px;
+    border-radius: 2px;
+  }
+  .luxstay-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  .luxstay-cards .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    width: 320px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardFadeUp 0.6s ease forwards;
+  }
+  .luxstay-cards .card:nth-child(1) { animation-delay: 0.2s; }
+  .luxstay-cards .card:nth-child(2) { animation-delay: 0.4s; }
+  .luxstay-cards .card:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes cardFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .luxstay-cards .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  }
+  .luxstay-cards .icon-emoji {
+    font-size: 2.5rem;
+    background: #e6efff;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .luxstay-cards h3 {
+    font-size: 1.25rem;
+    color: #1e1e2f;
+    margin-bottom: 12px;
+  }
+  .luxstay-cards p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
 
 .navbar {
     display: flex;
@@ -86,7 +144,16 @@ body {
     align-items: center;
     gap: 10px; /* Space between logo image and text */
 }
-
+/* Add this to your CSS */
+.logo {
+    display: inline-block;
+    animation: subtleBounce 3s ease-in-out infinite;
+  }
+  
+  @keyframes subtleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
 .luxlodgelogo-img {
     height: 200px;
     width: 270px;
@@ -106,6 +173,60 @@ body {
     font-weight: bold;
     font-size: 16px;
 }
+/* 1. Make links position relative to hold the pseudo-element */
+.nav-links li a {
+    position: relative;
+    padding-bottom: 5px; /* give space for the line */
+    transition: color 0.3s ease;
+  }
+  
+  /* 2. Create the underline with ::after */
+  .nav-links li a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0%;
+    height: 3px;             /* thickness of the line */
+    background: #007bff;     /* LuxStay blue */
+    transition: width 0.3s ease;
+  }
+  
+  /* 3. On hover (and focus for accessibility), expand it */
+  .nav-links li a:hover::after,
+  .nav-links li a:focus::after {
+    width: 100%;
+  }
+  
+  /* 4. Optional: change link color on hover */
+  .nav-links li a:hover,
+  .nav-links li a:focus {
+    color: #007bff;
+  }
+  
+/* Add this to your CSS */
+.nav-item {
+    position: relative;
+    display: inline-block;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+  
+  .nav-item::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #2a5a78;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .nav-item:hover::after {
+    width: 80%;
+  }
 
 .hero {
     background: url('/static/lobby1.jpg') no-repeat center center;
@@ -491,7 +612,24 @@ body {
 .cancel-btn:hover {
     background-color: #c0392b;
 }
-
+/* Add this to your CSS */
+.cta-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #2a5a78;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  }
+  
+  .cta-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    background: #1d4257;
+  }
 .my-reservations {
     max-width: 600px;
     margin: 80px auto;
@@ -567,4 +705,270 @@ body {
 .auth-container {
     margin-bottom:70px;
 }
+/* ============================ */
+/*   Why Choose LuxStay Styles  */
+/* ============================ */
+.why-choose-luxstay {
+    padding: 80px 20px;
+    background: #f8f9fa;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .why-choose-luxstay.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .why-choose-luxstay h2 {
+    font-size: 2.5rem;
+    color: #1e1e2f;
+    margin-bottom: 8px;
+  }
+  .why-choose-luxstay .underline {
+    width: 60px;
+    height: 4px;
+    background: #3951b4;
+    margin: 0 auto 40px;
+    border-radius: 2px;
+  }
+  
+  .luxstay-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .luxstay-cards .card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    width: 320px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: cardFadeUp 0.6s ease forwards;
+  }
+  .luxstay-cards.visible .card { /* unused; we animate individually below */ }
+  
+  .luxstay-cards .card:nth-child(1) { animation-delay: 0.2s; }
+  .luxstay-cards .card:nth-child(2) { animation-delay: 0.4s; }
+  .luxstay-cards .card:nth-child(3) { animation-delay: 0.6s; }
+  
+  @keyframes cardFadeUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .luxstay-cards .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+  }
+  
+  .luxstay-cards .icon-wrapper {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    background: #e6efff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .luxstay-cards .icon-wrapper img {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .luxstay-cards h3 {
+    font-size: 1.25rem;
+    color: #1e1e2f;
+    margin-bottom: 12px;
+  }
+  .luxstay-cards p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+/* Why Choose Section */
+.why-choose {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    text-align: center;
+    animation: fadeInUp 1s ease forwards;
+    opacity: 0;
+    transform: translateY(20px);
+}
 
+.why-choose.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.why-choose h2 {
+    font-size: 36px;
+    margin-bottom: 50px;
+    color: #1a1a1a;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.feature-card {
+    background-color: #f8f9fa;
+    padding: 30px;
+    width: 300px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.feature-card img {
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.feature-card p {
+    font-size: 15px;
+    color: #555;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* ================================ */
+/*   Ready to Experience Luxury CTA  */
+/* ================================ */
+.cta-experience {
+    background: url('/static/cta-bg.jpg') center/cover no-repeat;
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    color: #fff;
+  }
+  .cta-experience::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .cta-experience .cta-content {
+    position: relative;
+    z-index: 1;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .cta-experience h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  .cta-experience p {
+    font-size: 1.125rem;
+    margin-bottom: 30px;
+    line-height: 1.4;
+  }
+  .cta-experience .cta-btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 1rem;
+    background: #007bff;
+    color: #fff;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .cta-experience .cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+  }
+  
+  /* ================ Footer ================ */
+  .site-footer {
+    background: #1e1e2f;
+    color: #ccc;
+    padding: 60px 20px 20px;
+    font-size: 0.95rem;
+  }
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  .footer-about,
+  .footer-contact,
+  .footer-links {
+    flex: 1 1 250px;
+  }
+  .footer-about h3 {
+    color: #fff;
+    margin-bottom: 15px;
+  }
+  .footer-contact h4,
+  .footer-links h4 {
+    color: #fff;
+    margin-bottom: 10px;
+  }
+  .footer-contact p,
+  .footer-links ul li {
+    margin-bottom: 8px;
+  }
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-links ul li a {
+    color: #ccc;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links ul li a:hover {
+    color: #fff;
+  }
+  .footer-contact a {
+    color: #ccc;
+    text-decoration: none;
+  }
+  .footer-contact a:hover {
+    color: #fff;
+  }
+  .footer-bottom {
+    border-top: 1px solid #333;
+    text-align: center;
+    padding-top: 20px;
+  }
+  
