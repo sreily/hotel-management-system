@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Reservations | LuxLodge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <a href ="/">
+            <img src="{{ url_for('static', filename='luxlodgelogo.png') }}" alt="LuxLodge Logo" class="luxlodgelogo-img">
+            </a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/rooms">Rooms</a></li>
+            <li><a href="/my-reservations">My Reservations</a></li>
+            <li><a href="/logout" class="logout-link">Logout</a></li>
+        </ul>
+        
+    </nav>
+<div class="my-reservations">
+    <h1>Confirm Cancellation</h1>
+    <p>Are you sure you want to cancel this reservation?</p>
+    <ul class="confirm-details">
+        <li><strong>Email:</strong> {{ email }}</li>
+        <li><strong>Check-in:</strong> {{ check_in }}</li>
+        <li><strong>Check-out:</strong> {{ check_out }}</li>
+    </ul>
+    <form method="POST" action="/cancel-reservation" class="confirm-actions">
+        <input type="hidden" name="cancel_email" value="{{ email }}">
+        <input type="hidden" name="cancel_check_in" value="{{ check_in }}">
+        <input type="hidden" name="cancel_check_out" value="{{ check_out }}">
+        <button type="submit" class="cancel-btn">Yes, Cancel</button>
+        <a href="/my-reservations" class="go-back-link">No, Go Back</a>
+    </form>
+    
+</div>
+</body>
+</html>

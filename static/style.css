@@ -164,7 +164,7 @@ body {
     border: 2px solid #007bff;
 }
 .logout-link {
-    color: #ff4d4d; /* red color */
+    color: #ff4d4d;
     font-weight: bold;
 }
 
@@ -445,7 +445,7 @@ body {
 
 .reservation-card {
     background: white;
-    border-radius: 8px;
+    border-radius: 10px;
     display: flex;
     padding: 20px;
     margin: 20px auto;
@@ -486,6 +486,7 @@ body {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
+    margin-left:15px;
 }
 
 .cancel-btn:hover {
@@ -493,7 +494,7 @@ body {
 }
 
 .my-reservations {
-    max-width: 600px;
+    max-width: 1900px;
     margin: 80px auto;
     padding: 30px;
     background-color: #ffffff;
@@ -568,3 +569,24 @@ body {
     margin-bottom:70px;
 }
 
+.cancelled-label {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-left: auto;
+}
+
+.go-back-link {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left:15px;
+    text-decoration:none;
+}
+
+.go-back-link:hover {
+    background-color: #ccc;
+}
