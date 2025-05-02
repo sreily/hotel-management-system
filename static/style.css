@@ -58,6 +58,8 @@ body, html {
     text-decoration: underline;
 }
 
+  
+  /* Only the hero needs to be full-screen centered */
   .hero {
     background: url('/static/lobby1.jpg') no-repeat center center;
     background-size: cover;
@@ -68,8 +70,8 @@ body, html {
     text-align: center;
     position: relative;
     padding: 0 20px;
-    width:100%;
   }
+  /* Add this to your CSS */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -863,4 +865,121 @@ body, html {
     padding-top: 20px;
     border-top: 1px solid #333;
 }
+.faq-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
 
+.faq-intro {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.faq-item {
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+
+.faq-item h3 {
+    color: #2a6496;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+}
+.faq-header{
+    margin-left : 270PX;
+
+
+}
+.faq-item p {
+    line-height: 1.6;
+    margin: 0;
+}
+
+.faq-footer {
+    margin-top: 40px;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.faq-footer p {
+    margin-bottom: 15px;
+}
+
+.contact-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #2a6496;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.contact-button:hover {
+    background-color: #1d4b75;
+}
+/* Add this to your CSS */
+.faq-section {
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.faq-item {
+    overflow: hidden;
+    transition: all 0.3s ease;
+    max-height: 1000px; /* Adjust based on content */
+}
+
+.faq-item.collapsed {
+    max-height: 60px; /* Just show the question */
+    cursor: pointer;
+}
+.faq-item:hover {
+    background-color: #f8f9fa;
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+.contact-button {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.contact-button:hover {
+    animation: none;
+    transform: scale(1.05);
+}
+.faq-item h3 {
+    display: inline-block;
+    position: relative;
+}
+
+.faq-item h3::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #2a6496;
+    transition: width 0.3s ease;
+}
+
+.faq-item:hover h3::after {
+    width: 100%;
+}
