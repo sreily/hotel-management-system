@@ -58,8 +58,6 @@ body, html {
     text-decoration: underline;
 }
 
-  
-  /* Only the hero needs to be full-screen centered */
   .hero {
     background: url('/static/lobby1.jpg') no-repeat center center;
     background-size: cover;
@@ -70,8 +68,8 @@ body, html {
     text-align: center;
     position: relative;
     padding: 0 20px;
+    width:100%;
   }
-  /* Add this to your CSS */
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
