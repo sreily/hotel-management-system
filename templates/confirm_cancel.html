@@ -28,10 +28,10 @@
         <li><strong>Check-in:</strong> {{ check_in }}</li>
         <li><strong>Check-out:</strong> {{ check_out }}</li>
     </ul>
-    <form method="POST" action="/cancel-reservation" class="confirm-actions">
+    <form method="POST" action="/perform-cancel" class="confirm-actions">
         <input type="hidden" name="cancel_email" value="{{ email }}">
         <input type="hidden" name="cancel_check_in" value="{{ check_in }}">
-        <input type="hidden" name="cancel_check_out" value="{{ check_out }}">
+        <input type="hidden" name="cancel_check_out" value="{{ check_out }}">      
         <button type="submit" class="cancel-btn">Yes, Cancel</button>
         <a href="/my-reservations" class="go-back-link">No, Go Back</a>
     </form>

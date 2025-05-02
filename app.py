@@ -2,11 +2,33 @@ from flask import Flask, render_template, request, redirect, session
 from hotel import HotelManagementSystem
 
 app = Flask(__name__)
+
+from flask_sqlalchemy import SQLAlchemy
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost/hotel_db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
 app.secret_key = 'vgtucomputerengineeringekfu24/1'
 
-reservations_data = {}
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100), unique=True, nullable=False)
+    password = db.Column(db.String(100), nullable=False)
 
-users = {}
+class Reservation(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    room_name = db.Column(db.String(100))
+    full_name = db.Column(db.String(100))
+    phone = db.Column(db.String(20))
+    check_in = db.Column(db.String(20))
+    check_out = db.Column(db.String(20))
+    guests = db.Column(db.Integer)
+    status = db.Column(db.String(20), default='confirmed')
+
+    user = db.relationship('User', backref='reservations')
 
 room_info = {
     'deluxe': {
@@ -44,12 +66,17 @@ def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-        if email in users and users[email] == password:
+
+        user = User.query.filter_by(email=email, password=password).first()
+
+        if user:
             session['email'] = email
             return redirect('/')
         else:
             error = "Incorrect Email Address or Password"
+
     return render_template('login.html', error=error)
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -57,12 +84,19 @@ def register():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
+
         if '@' not in email or '.' not in email:
             error = "Invalid Email Address"
+        elif User.query.filter_by(email=email).first():
+            error = "Email already registered"
         else:
-            users[email] = password
+            new_user = User(email=email, password=password)
+            db.session.add(new_user)
+            db.session.commit()
             return redirect('/login')
+
     return render_template('register.html', error=error)
+
 
 @app.route('/')
 def home():
@@ -125,48 +159,52 @@ def confirmation():
 def reservations():
     if 'email' not in session:
         return redirect('/login')
-    
-    email = session['email']
 
-    reservation = {
-        'room_name': request.form['room_name'],
-        'full_name': request.form['full_name'],
-        'email': request.form['email'],
-        'phone': request.form['phone'],
-        'check_in': request.form['check_in'],
-        'check_out': request.form['check_out'],
-        'guests': request.form['guests'],
-    }
+    user = User.query.filter_by(email=session['email']).first()
 
-    if email not in reservations_data:
-        reservations_data[email] = []
+    new_reservation = Reservation(
+        user_id=user.id,
+        room_name=request.form['room_name'],
+        full_name=request.form['full_name'],
+        phone=request.form['phone'],
+        check_in=request.form['check_in'],
+        check_out=request.form['check_out'],
+        guests=int(request.form['guests']),
+    )
 
-    reservations_data[email].append(reservation)
+    db.session.add(new_reservation)
+    db.session.commit()
 
     room_details = next(
-        (details for key, details in room_info.items() if details['name'] == reservation['room_name']),
+        (details for key, details in room_info.items() if details['name'] == request.form['room_name']),
         None
     )
 
     return render_template('confirmation.html', room=room_details)
 
-@app.route('/cancel-reservation', methods=['POST'])
-def cancel_reservation():
+
+@app.route('/perform-cancel', methods=['POST'])
+def perform_cancel():
     if 'email' not in session:
         return redirect('/login')
 
-    email = session['email']
-    cancel_email = request.form['cancel_email']
+    user = User.query.filter_by(email=session['email']).first()
     check_in = request.form['cancel_check_in']
     check_out = request.form['cancel_check_out']
 
-    if email in reservations_data:
-        reservations_data[email] = [
-            r for r in reservations_data[email]
-            if not (r['email'] == cancel_email and r['check_in'] == check_in and r['check_out'] == check_out)
-        ]
+    reservation = Reservation.query.filter_by(
+        user_id=user.id,
+        check_in=check_in,
+        check_out=check_out,
+        status='confirmed'
+    ).first()
+
+    if reservation:
+        reservation.status = 'cancelled'
+        db.session.commit()
 
     return redirect('/my-reservations')
+
 
 @app.route('/confirm-cancel', methods=['GET'])
 def confirm_cancel():
@@ -177,20 +215,19 @@ def confirm_cancel():
 
 @app.route('/my-reservations', methods=['GET', 'POST'])
 def my_reservations():
-    reservations = None
+    reservations = []
     email_searched = None
 
     if request.method == 'POST':
-        email = request.form['email']
-        email_searched = email
+        email_searched = request.form['email']
+        user = User.query.filter_by(email=email_searched).first()
 
-        reservations = []
-        for user_reservations in reservations_data.values():
-            for reservation in user_reservations:
-                if reservation['email'] == email:
-                    reservations.append(reservation)
+        if user:
+            reservations = Reservation.query.filter_by(user_id=user.id, status='confirmed').all()
+
 
     return render_template('my_reservations.html', reservations=reservations, email_searched=email_searched)
+
 
 
 @app.route('/logout')
@@ -198,6 +235,8 @@ def logout():
     session.pop('email', None)
     return redirect('/login')
 
-
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
+

@@ -43,13 +43,14 @@
     <p><strong>Guests:</strong> {{ reservation.guests }}</p>
     <p><strong>Guest Name:</strong> {{ reservation.full_name }}</p>
     <p><strong>Phone:</strong> {{ reservation.phone }}</p>
-    <p><strong>Email:</strong> {{ reservation.email }}</p>
+    <p><strong>Email:</strong> {{ reservation.user.email }}</p>
+
 
     {% if reservation.status == 'Cancelled' %}
         <div class="cancelled-label">Cancelled</div>
     {% else %}
     <form action="/confirm-cancel" method="GET">
-        <input type="hidden" name="email" value="{{ reservation.email }}">
+        <input type="hidden" name="email" value="{{ reservation.user.email }}">
         <input type="hidden" name="check_in" value="{{ reservation.check_in }}">
         <input type="hidden" name="check_out" value="{{ reservation.check_out }}">
         <button type="submit" class="cancel-btn">Cancel Reservation</button>
